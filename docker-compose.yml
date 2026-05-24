@@ -1,0 +1,56 @@
+# ============================================================
+# myTIMeS Direct V2 — Docker Compose
+# ============================================================
+# Only the Flask backend is Dockerized.
+# The React Native / Expo frontend runs on the developer's machine via:
+#   cd frontend && npx expo start
+#
+# SQLite is a file, not a container — it is volume-mounted so data
+# survives container restarts.
+#
+# Firebase is Google's cloud service — no container needed.
+#
+# The LBPH .yml model files are volume-mounted so re-enrollment
+# data persists across container restarts.
+#
+# firebase_credentials.json and haarcascade XML are read-only mounts.
+# ============================================================
+
+services:
+  backend:
+    container_name: mytimes_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    environment:
+      FLASK_ENV: ${FLASK_ENV:-production}
+      FLASK_DEBUG: ${FLASK_DEBUG:-0}
+      DATABASE_URL: sqlite:////app/database/attendance.db
+      LBPH_MODELS_PATH: /app/models_storage
+      HAAR_CASCADE_PATH: /app/haarcascade_frontalface_default.xml
+      FIREBASE_CREDENTIALS_PATH: /app/firebase_credentials.json
+      RECOGNITION_THRESHOLD: 70
+    volumes:
+      - ./backend/database:/app/database # SQLite persistence — attendance.db survives container restart
+      - ./backend/models_storage:/app/models_storage # LBPH .yml model files — re-enrollment data persists
+      - ./backend/firebase_credentials.json:/app/firebase_credentials.json:ro # Read-only Firebase service account key
+      - ./backend/haarcascade_frontalface_default.xml:/app/haarcascade_frontalface_default.xml:ro # Read-only Haar Cascade model file
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:5000/health/ping" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+      # start_period gives the container 60s to boot before health checks begin.
+      # This covers the time needed to load LBPH models on first startup.
+    networks:
+      - mytimes_network
+
+networks:
+  mytimes_network:
+    driver: bridge

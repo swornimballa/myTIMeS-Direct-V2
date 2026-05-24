@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Secrets
+.env
+firebase_credentials.json
+*.key
+*.pem
+*.p12
+serviceAccountKey.json
+
+# Database
+backend/database/attendance.db
+*.db
+
+# ML models
+backend/models_storage/*.yml
+backend/models_storage/*.xml
+
+# Node/Expo
+frontend/node_modules/
+frontend/.expo/
+frontend/dist/
+frontend/build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
+logs/
+
+# Docker
+.docker/

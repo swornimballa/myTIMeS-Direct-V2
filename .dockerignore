@@ -1,0 +1,50 @@
+# Keeps the Docker build context lean and prevents secrets from
+# being accidentally copied into the image.
+
+# Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+env/
+
+# Secrets — these are mounted as volumes at runtime, never baked in
+.env
+firebase_credentials.json
+*.key
+*.pem
+*.p12
+serviceAccountKey.json
+
+# Generated files — volume-mounted instead of copied
+backend/database/attendance.db
+backend/database/*.db
+backend/models_storage/*.yml
+
+# Frontend — not needed in the backend Docker image
+frontend/
+
+# Documentation and scripts — not needed at runtime
+docs/
+scripts/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Tests — not needed in production image
+*/tests/
