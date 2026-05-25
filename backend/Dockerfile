@@ -27,6 +27,8 @@ COPY requirements.txt .
 # Install dependencies into a specific prefix so they can be easily copied
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
+RUN python3 -c "import sqlite3; v=sqlite3.sqlite_version_info; assert v>=(3,24,0), f'SQLite {sqlite3.sqlite_version} too old, need 3.24.0+'"
+
 # ==========================================
 # Stage 2: Runtime
 # ==========================================

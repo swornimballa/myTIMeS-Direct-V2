@@ -29,7 +29,7 @@ services:
     environment:
       FLASK_ENV: ${FLASK_ENV:-production}
       FLASK_DEBUG: ${FLASK_DEBUG:-0}
-      DATABASE_URL: sqlite:////app/database/attendance.db
+      DATABASE_PATH: /app/database/attendance.db
       LBPH_MODELS_PATH: /app/models_storage
       HAAR_CASCADE_PATH: /app/haarcascade_frontalface_default.xml
       FIREBASE_CREDENTIALS_PATH: /app/firebase_credentials.json

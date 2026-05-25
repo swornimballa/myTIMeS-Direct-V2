@@ -46,3 +46,31 @@ logs/
 
 # Docker
 .docker/
+
+# Environment examples (optional - uncomment if you don't want these on git)
+# .env.example
+
+# Python testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Frontend environment
+frontend/.env
+frontend/.env.local
+
+# Backend environment  
+backend/.env
+backend/.env.local
+
+# Expo specific
+.expo-shared/
+frontend/web-build/
+
+# Package manager
+frontend/yarn.lock

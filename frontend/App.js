@@ -22,6 +22,7 @@ import StartClassScreen from './screens/StartClassScreen';
 import TeacherClassesScreen from './screens/TeacherClassesScreen';
 import TeacherReportsScreen from './screens/TeacherReportsScreen';
 import TeacherProfileScreen from './screens/TeacherProfileScreen';
+import TeacherStudentsScreen from './screens/TeacherStudentsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -54,6 +55,7 @@ export default function App() {
         <Stack.Screen name="TeacherDashboard"   component={TeacherDashboardScreen} />
         <Stack.Screen name="StartClass"         component={StartClassScreen} />
         <Stack.Screen name="TeacherClasses"     component={TeacherClassesScreen} />
+        <Stack.Screen name="TeacherStudents"    component={TeacherStudentsScreen} />
         <Stack.Screen name="TeacherReports"     component={TeacherReportsScreen} />
         <Stack.Screen name="TeacherProfile"     component={TeacherProfileScreen} />
       </Stack.Navigator>
